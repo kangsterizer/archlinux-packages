@@ -1,7 +1,7 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-system-monitor
-pkgver=1.5.0
+pkgver=1.5.1
 pkgrel=1
 pkgdesc="A system monitor for MATE"
 arch=(i686 x86_64)
@@ -12,8 +12,8 @@ groups=('mate-extras')
 options=(!emptydirs !libtool)
 url="http://mate-desktop.org"
 install=mate-system-monitor.install
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('dfae9e752eeaf1c99230cdb083a97bb0dd5803b173339357a2deefa9f83453e5')
+source=(http://pub.mate-desktop.org/releases/1.5/${pkgname}-${pkgver}.tar.xz)
+sha256sums=('ff1b456ee94fac38ae518d5fd82cd0ae1bd9144a4502b5b17ebb48b164aa7c8b')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"

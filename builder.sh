@@ -77,13 +77,15 @@ function get_sum()
 	echo $s
 }
 
-
-function process()
+function get_my_sums()
 {
 		log "Source is ${REPO_URL}${CURRENT_RELEASE}"
 		[[ -f ${CHECKSUMS} ]] || wget ${REPO_URL}${CURRENT_RELEASE}/${CHECKSUMS}
-		sums=$(cat ${CHECKSUMS})
+		cat ${CHECKSUMS}
+}
 
+function process()
+{
 		IFS="
 		"
 		for line in ${sums}; do
@@ -115,8 +117,21 @@ function process()
 		unset IFS
 }
 
+sums=$(get_my_sums)
+
 [[ $# -eq 1  ]] && {
-	autobuild $1 || {
+	p=$1
+	v=$(find_latest_version ${p})
+	source ${p}/PKGBUILD
+	[[ ${pkgver} != ${v} ]] && {
+			log "- version mismatch. current: ${pkgver} newest: ${v} for package ${p}"
+			autoupgrade ${p} ${pkgver} ${v}  || {
+				warn "! Failed auto-upgrade ${p}"
+				handle_failure
+			}
+	}
+
+	autobuild ${p} || {
 			warn "! Failed auto-building ${p}"
 			handle_failure
 	}

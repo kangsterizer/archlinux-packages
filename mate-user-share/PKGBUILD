@@ -9,16 +9,16 @@ pkgrel=1
 pkgdesc=""
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('')
-makedepends=('') #
+#depends=('')
+#makedepends=('') #
 groups=('mate-extras')
 options=(!emptydirs)
 replace=('')
 conflicts=('')
 url="http://mate-desktop.org"
-install=mate-applets.install
+#install=mate-applets.install
 source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('')
+sha256sums=('f0a602469a63f2769b99d9b2663771a57338032ef44ca80dae34ddf57d7674b7')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"

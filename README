@@ -1,0 +1,1 @@
+mate-gen knows about automake-1.12 but not 1.13, so you'll need automake-1.12

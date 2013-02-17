@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-utils
-pkgver=1.4.0
+pkgver=1.5.0
 pkgrel=1
 pkgdesc="Common MATE utilities for viewing disk usage, logs and fonts, taking screenshots, managing dictionaries and searching files"
 arch=('i686' 'x86_64')
@@ -12,19 +12,20 @@ options=('!libtool' '!emptydirs')
 install=mate-utils.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
-sha256sums=('49ec02682b8146bb96cf30c61a7d4e7c7630d22bcfe8fbeb8a7c20fd6bec5591')
+source=(http://pub.mate-desktop.org/releases/1.5/${pkgname}-${pkgver}.tar.xz)
+sha256sums=('e156825235a8802b08907128be39b1100032d4e06e2097cea96b38435210b071')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
-	./autogen.sh --prefix=/usr --sysconfdir=/etc --disable-static \
+	autoreconf -fiv
+	./configure --prefix=/usr --sysconfdir=/etc --disable-static \
 		--libexecdir=/usr/lib/mate-utils \
 		--localstatedir=/var \
 		--disable-scrollkeeper \
 		--disable-schemas-install 
 	gtkdocize --copy
 	mate-doc-prepare --copy --force
-	./configure || return 1
+#	./configure || return 1
 	make || return 1
 }
 

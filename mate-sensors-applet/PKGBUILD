@@ -1,7 +1,7 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-sensors-applet
-pkgver=1.4.0
+pkgver=1.5.1
 pkgrel=1
 pkgdesc="An applet for the MATE Panel to display readings from hardware sensors, including CPU temperature, fan speeds and voltage readings under Linux"
 arch=('i686' 'x86_64')
@@ -11,13 +11,13 @@ depends=('mate-panel' 'lm_sensors' 'udisks' 'xdg-utils')
 makedepends=('intltool' 'mate-doc-utils' 'git' 'autoconf' 'automake')
 options=('!libtool')
 install=$pkgname.install
-source=(http://pub.mate-desktop.org/releases/1.4/$pkgname-$pkgver.tar.xz)
-sha256sums=('4c0c8bba90c1e86fcbca6e1d7ed2e13181264664c55cbef7a3e6bc22710c9ef4')
+source=(http://pub.mate-desktop.org/releases/1.5/${pkgname}-${pkgver}.tar.xz)
+sha256sums=('1722545d1d50eac169e88e85ed50a344e2df659ebb621192f384b5a4596d15a8')
 
 build() {
-cd $srcdir/$pkgname-$pkgver
- 
-  ./autogen.sh LDFLAGS="-ldl" --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
+  cd $srcdir/$pkgname-$pkgver
+  autoreconf -fiv 
+  ./configure LDFLAGS="-ldl" --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib/$pkgname \
   --disable-static --disable-scrollkeeper
   make
 }

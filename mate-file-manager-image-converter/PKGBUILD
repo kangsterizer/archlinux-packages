@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-file-manager-image-converter
-pkgver=1.3.0
+pkgver=1.5.0
 pkgrel=1
 pkgdesc="An extension for opening terminals in arbitrary local paths"
 arch=('i686' 'x86_64')
@@ -9,15 +9,16 @@ url="http://manny.cluecoder.org/packages/nautilus-open-terminal"
 license=('GPL')
 depends=('mate-file-manager')
 makedepends=('pkgconfig' 'intltool')
-install=mate-file-manager-open-terminal.install
+#install=mate-file-manager-open-terminal.install
 options=('!libtool')
 group=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.2/$pkgname-$pkgver.tar.xz)
-sha256sums=('0d2e252c292f75eb07b6ca39c171ee984b0c2b51af2b2bd17772137cb0dbeeca')
+source=(http://pub.mate-desktop.org/releases/1.5/${pkgname}-${pkgver}.tar.xz)
+sha256sums=('2cddca00bf4c9b1fcdc1d665d7d10eea184180ea32ed817613002b3ef3538daf')
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
-	./autogen.sh --prefix=/usr 
+	autoreconf -fiv
+	./configure --prefix=/usr 
 
 	#fix non-standard directory
 	sed -i 's|${prefix}/etc|/etc|' Makefile

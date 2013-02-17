@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=libmatekbd
-pkgver=1.5.0
+pkgver=1.5.1
 pkgrel=1
 pkgdesc="MATE keyboard library"
 arch=('i686' 'x86_64')
@@ -12,8 +12,8 @@ groups=('mate')
 url="http://mate-desktop.org"
 options=('!emptydirs' '!libtool')
 #install=libmatekbd.install
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz)
-sha256sums=('2dbe88bef0fe340605123cf7506b4bd668d17deb31cf719d5eebe289da987b3d')
+source=(http://pub.mate-desktop.org/releases/1.5/${pkgname}-${pkgver}.tar.xz)
+sha256sums=('eb61dcd2f0276848d5c6c4a06093d46249faae72d4131bdb1a070899fb7bd006')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"

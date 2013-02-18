@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REPO_URL="http://pub.mate-desktop.org/releases/" #make it https! :(
-CURRENT_RELEASE=1.5
+CURRENT_RELEASE=1.4
 CHECKSUMS="SHA1SUMS"
 
 RED="\e[00;31m"
@@ -79,13 +79,13 @@ function get_sum()
 
 function get_my_sums()
 {
-		log "Source is ${REPO_URL}${CURRENT_RELEASE}"
 		[[ -f ${CHECKSUMS} ]] || wget ${REPO_URL}${CURRENT_RELEASE}/${CHECKSUMS}
 		cat ${CHECKSUMS}
 }
 
 function process()
 {
+		[[ -f .skip_list ]] && skip_list=$(cat .skip_list)
 		IFS="
 		"
 		for line in ${sums}; do
@@ -96,7 +96,8 @@ function process()
 				v=$(find_latest_version ${p})
 				s=$(get_sum ${p}-${v})
 
-				[[ -d ${p} ]] || { echo "! Package ${p} is missing"; continue; }
+				echo "${skip_list}" | grep -q ^${p} && { log "+ Skipping ${p}"; continue; }
+				[[ -d ${p} ]] || { warn "! Package ${p} is missing"; continue; }
 				[[ -f ${p}/PKGBUILD ]] || { warn "! PKGBUILD is missing for ${p}"; continue; }
 
 
@@ -117,10 +118,12 @@ function process()
 		unset IFS
 }
 
+log "Source is ${REPO_URL}${CURRENT_RELEASE}"
 sums=$(get_my_sums)
 
 [[ $# -eq 1  ]] && {
 	p=$1
+	[[ -d ${p} ]] || { warn "${p} does not exist."; handle_failure; }
 	v=$(find_latest_version ${p})
 	source ${p}/PKGBUILD
 	[[ ${pkgver} != ${v} ]] && {

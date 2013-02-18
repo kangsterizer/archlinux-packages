@@ -1,17 +1,17 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-panel
-pkgver=1.5.5
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="The MATE Panel"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('libmatewnck' 'mate-menus' 'mate-desktop' 'librsvg' 'hicolor-icon-theme' 'libcanberra' 'libmateweather') # 'evolution-data-server'
-makedepends=('mate-doc-utils' 'pkgconfig' 'intltool' 'networkmanager')
+makedepends=('mate-doc-utils' 'pkgconfig' 'intltool' 'networkmanager' 'mate-menus' 'libmatewnck')
 options=('!emptydirs' '!libtool')
 install=mate-panel.install
-source=(http://pub.mate-desktop.org/releases/1.5/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('afbda559d464adc29ab570044bddc0cfb383505269e17eb669392ab957740fcd')
+source=(http://pub.mate-desktop.org/releases/1.4/${pkgname}-${pkgver}.tar.xz)
+sha256sums=('3438a9d19ae367b28611f7bf1496d10cd9863574bd63ed4f2650503e8b96e192')
 
 url="http://mate-desktop.org"
 groups=('mate')

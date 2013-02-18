@@ -1,6 +1,6 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 pkgname=mate-desktop
-pkgver=1.5.6
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Library with common API for various MATE modules"
 arch=(i686 x86_64)
@@ -10,8 +10,8 @@ makedepends=('mate-doc-utils' 'intltool' 'mate-common' 'gtk-doc')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.5/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('04bb0b7bf927b2fa2464de2a8902a035fa983b1fbd4641e98c4a2fbbb84adeae')
+source=(http://pub.mate-desktop.org/releases/1.4/${pkgname}-${pkgver}.tar.xz)
+sha256sums=('46c31926108f8177f9162d2396ce681f198a3f31eafb1961dfac21b5b9e4e27e')
 
 
 build() {

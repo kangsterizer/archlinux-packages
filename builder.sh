@@ -8,12 +8,6 @@ RED="\e[00;31m"
 LRED="\e[01;31m"
 NORMAL="\e[00m"
 
-function handle_failure()
-{
-		exit 1
-		echo "Ignoring errors"
-}
-
 function warn()
 {
 		echo -e ${LRED}$*${NORMAL}
@@ -22,6 +16,12 @@ function warn()
 function log()
 {
 		echo -e ${RED}$*${NORMAL}
+}
+
+function handle_failure()
+{
+		[[ ${FORCE} -eq 1 ]] || exit 1
+		warn "Force mode - ignoring errors"
 }
 
 function autoupgrade()
@@ -118,27 +118,51 @@ function process()
 		unset IFS
 }
 
-log "Source is ${REPO_URL}${CURRENT_RELEASE}"
+
 sums=$(get_my_sums)
 
+OPTERR=1
+while getopts ":f:v:a" option;
+do
+		case $option in
+		v)
+			log "Source is ${REPO_URL}${CURRENT_RELEASE}"
+			;;
+		f)
+			FORCE=1
+			;;
+		a)
+			process
+			exit
+			;;
+		*)
+			;;
+		esac
+done
+shift $(($OPTIND - 1))
+
 [[ $# -eq 1  ]] && {
-	p=$1
-	[[ -d ${p} ]] || { warn "${p} does not exist."; handle_failure; }
-	v=$(find_latest_version ${p})
-	source ${p}/PKGBUILD
-	[[ ${pkgver} != ${v} ]] && {
-			log "- version mismatch. current: ${pkgver} newest: ${v} for package ${p}"
-			autoupgrade ${p} ${pkgver} ${v}  || {
-				warn "! Failed auto-upgrade ${p}"
+		p=$1
+		[[ -d ${p} ]] || { warn "${p} does not exist."; handle_failure; }
+		v=$(find_latest_version ${p})
+		source ${p}/PKGBUILD
+		[[ ${pkgver} != ${v} ]] && {
+				log "- version mismatch. current: ${pkgver} newest: ${v} for package ${p}"
+				autoupgrade ${p} ${pkgver} ${v}  || {
+					warn "! Failed auto-upgrade ${p}"
+					handle_failure
+				}
+		}
+		autobuild ${p} || {
+				warn "! Failed auto-building ${p}"
 				handle_failure
-			}
-	}
-
-	autobuild ${p} || {
-			warn "! Failed auto-building ${p}"
-			handle_failure
-	}
-	exit
+		}
+} || {
+	echo "USAGE: $0 [OPTION] [PKGDIR]"
+	echo "OPTIONS:"
+	echo -e "\t\t-a\tBuild everything"
+	echo -e "\t\t-f\tAttempt to force building on errors (keeps going on failure)"
+	echo -e "\t\t-v\tVerbose"
+	echo -e "PKGDIR:\t\t\tBuild a directory containing a PKGBUILD file"
+	exit 127
 }
-
-process

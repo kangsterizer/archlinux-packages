@@ -1,7 +1,7 @@
 #Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=libmateweather
-pkgver=1.5.1
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Provides access to weather information from the net"
 arch=('i686' 'x86_64')
@@ -12,8 +12,8 @@ groups=('mate')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 #install=libmateweather.install
-source=(http://pub.mate-desktop.org/releases/1.5/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('e5c990a3c71a54ffc09f405c2bc1a3106807577e87573cbcd59e61f09d69e5a7')
+source=(http://pub.mate-desktop.org/releases/1.4/${pkgname}-${pkgver}.tar.xz)
+sha256sums=('5cdaf572db9aeb4c41506be976e3e745bcac03e878e0cc6abaab2241878c726e')
 
 
 build() {

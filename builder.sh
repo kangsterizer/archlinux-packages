@@ -31,6 +31,11 @@ function autoupgrade()
 		p=$1;ov=$2;v=$3;s=$4
 		target=${p}/PKGBUILD
 
+		[[ ${v} == "" ]] && {
+				warn "Version detection failed, skipping"
+				return
+		}
+
 		log "+ Auto-upgrading ${p} to version ${v}..."
 		sed -i s/^pkgver=${ov}/pkgver=${v}/ ${target}
 		sed -i s/^pkgrel=[0-9]/pkgrel=1/ ${target}
@@ -49,7 +54,8 @@ function autobuild()
 	p=$1
 
 	log "+ Auto-building ${p}..."
-	(cd ${p} && makepkg)
+	[[ ${NO_EXTRACT} -eq 1 ]] && (cd ${p} && makepkg -e)
+	[[ ${NO_EXTRACT} -eq 1 ]] || (cd ${p} && makepkg)
 }
 
 function find_latest_version()
@@ -122,9 +128,12 @@ function process()
 sums=$(get_my_sums)
 
 OPTERR=1
-while getopts ":f:v:a" option;
+while getopts ":f:v:e:a" option;
 do
 		case $option in
+		e)
+			NO_EXTRACT=1
+			;;
 		v)
 			log "Source is ${REPO_URL}${CURRENT_RELEASE}"
 			;;
@@ -163,6 +172,7 @@ shift $(($OPTIND - 1))
 	echo -e "\t\t-a\tBuild everything"
 	echo -e "\t\t-f\tAttempt to force building on errors (keeps going on failure)"
 	echo -e "\t\t-v\tVerbose"
+	echo -e "\t\t-e\tDon't cleanup/extract when building (uses older src dir if present)"
 	echo -e "PKGDIR:\t\t\tBuild a directory containing a PKGBUILD file"
 	exit 127
 }

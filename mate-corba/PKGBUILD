@@ -1,19 +1,17 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-
-pkgname=mate-utils
+pkgname=mate-corba
 pkgver=1.4.0
 pkgrel=1
-pkgdesc="Common MATE utilities for viewing disk usage, logs and fonts, taking screenshots, managing dictionaries and searching files"
+pkgdesc="MATE CORBA"
 arch=('i686' 'x86_64')
 license=('GPL')
-makedepends=('libgtop' 'libcanberra' 'libsm' 'mateconf' 'hicolor-icon-theme' 'desktop-file-utils')
+depends=('mate-common')
 makedepends=('mate-doc-utils' 'pkgconfig' 'intltool')
 options=('!libtool' '!emptydirs')
-install=mate-utils.install
+install=mate-corba.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.4/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('49ec02682b8146bb96cf30c61a7d4e7c7630d22bcfe8fbeb8a7c20fd6bec5591')
+sha256sums=('d3027f59a179729e3e97ea9ef244c56bfe6df0066370f7680abc358b99d84e40')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
@@ -21,7 +19,6 @@ build() {
 	./configure --prefix=/usr --sysconfdir=/etc --disable-static \
 		--libexecdir=/usr/lib/mate-utils \
 		--localstatedir=/var \
-		--disable-scrollkeeper \
 		--disable-schemas-install 
 	gtkdocize --copy
 	mate-doc-prepare --copy --force

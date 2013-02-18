@@ -1,7 +1,7 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-screensaver
-pkgver=1.5.1
+pkgver=1.4.0
 pkgrel=1
 pkgdesc='Screensaver for MATE'
 arch=('i686' 'x86_64')
@@ -10,7 +10,7 @@ license=('GPL')
 depends=('gtk2' 'dbus' 'mate-conf' 'mate-desktop')
 makedepends=('pkgconfig' 'intltool' 'mate-doc-utils')
 options=('!libtool' '!emptydirs')
-source=(http://pub.mate-desktop.org/releases/1.5/$pkgname-$pkgver.tar.xz
+source=(http://pub.mate-desktop.org/releases/1.4/${pkgname}-${pkgver}.tar.xz
 		mate-screensaver.pam)
 install=mate-screensaver.install
 sha256sums=('e4a8509e38db9c2b716bdbe2e216d5e21e5bc0777ed953722fed361fa7f1dadb'

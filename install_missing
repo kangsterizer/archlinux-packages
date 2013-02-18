@@ -1,1 +1,1 @@
-pacman -U --needed */*pkg*.xz
+pacman -Uf --needed */*pkg*.xz

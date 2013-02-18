@@ -1,7 +1,7 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-terminal
-pkgver=1.5.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="The MATE Terminal Emulator"
 arch=('i686' 'x86_64')
@@ -12,8 +12,8 @@ options=('!emptydirs' '!libtool')
 install=mate-terminal.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
-source=(http://pub.mate-desktop.org/releases/1.5/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('9c469bf1aa346658418a0bce87cc3746895b9c32d54585200acbdf55137b0b73')
+source=(http://pub.mate-desktop.org/releases/1.4/${pkgname}-${pkgver}.tar.xz)
+sha256sums=('2fe35f705d1e2b43fdfe49bf01f0a402e1263df4ac7c9cd6fcc23ef7a5956f66')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"

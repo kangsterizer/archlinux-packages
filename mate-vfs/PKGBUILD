@@ -1,19 +1,17 @@
-#Mantainer: Giovanni "Talorno" Ricciardi <kar98k.sniper@gmail.com>
-
-pkgname=mate-utils
+pkgname=mate-vfs
 pkgver=1.4.0
 pkgrel=1
-pkgdesc="Common MATE utilities for viewing disk usage, logs and fonts, taking screenshots, managing dictionaries and searching files"
+pkgdesc="MATE virtual file system"
 arch=('i686' 'x86_64')
 license=('GPL')
-makedepends=('libgtop' 'libcanberra' 'libsm' 'mateconf' 'hicolor-icon-theme' 'desktop-file-utils')
+depends=('mate-common')
 makedepends=('mate-doc-utils' 'pkgconfig' 'intltool')
 options=('!libtool' '!emptydirs')
-install=mate-utils.install
+install=mate-vfs.install
 url="http://mate-desktop.org"
 groups=('mate-extras')
 source=(http://pub.mate-desktop.org/releases/1.4/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('49ec02682b8146bb96cf30c61a7d4e7c7630d22bcfe8fbeb8a7c20fd6bec5591')
+sha256sums=('0e5e0c4cb607c13d6d356c59699de78d93f2b72e620b99244bf4fc329925dd9b')
 
 build() {
 	cd "${srcdir}/${pkgname}-$pkgver"
@@ -21,7 +19,6 @@ build() {
 	./configure --prefix=/usr --sysconfdir=/etc --disable-static \
 		--libexecdir=/usr/lib/mate-utils \
 		--localstatedir=/var \
-		--disable-scrollkeeper \
 		--disable-schemas-install 
 	gtkdocize --copy
 	mate-doc-prepare --copy --force

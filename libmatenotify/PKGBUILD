@@ -12,7 +12,7 @@ groups=('mate')
 options=('!emptydirs' '!libtool')
 url="http://mate-desktop.org"
 source=(http://pub.mate-desktop.org/releases/1.4/${pkgname}-${pkgver}.tar.xz)
-sha256sums=('a94c25ceb22692d998b209adaa9894e2f220a1c6aed72f50a43b1c925cacf137')
+
 
 
 build() {

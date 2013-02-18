@@ -1,7 +1,7 @@
 #Mantainer: Giovanni Ricciardi <kar98k.sniper@gmail.com>
 
 pkgname=mate-window-manager
-pkgver=1.5.3
+pkgver=1.4.1
 pkgrel=1
 pkgdesc="A window manager for MATE"
 arch=(i686 x86_64)
@@ -12,10 +12,10 @@ options=('!emptydirs' '!libtool')
 #install=mate-window-manager.install
 url="http://mate-desktop.org"
 groups=('mate')
-source=(http://pub.mate-desktop.org/releases/1.5/${pkgname}-${pkgver}.tar.xz
+source=(http://pub.mate-desktop.org/releases/1.4/${pkgname}-${pkgver}.tar.xz
         metacity-restartstyle.patch)
 
-sha256sums=('647b0cbb0e0250e16af37762e40a483e5b10337167b4ad6f0675f3ae19cb1a8f'
+sha256sums=('7b4dc32431a64cbbc0199d4793b9356605752b8f262cea6ae4750595d400ca14'
             'ea2450ca3e4fb59166ec18ff4844cc61cb16865880dc6b125078a3ab47bf2caf')
 
 build() {

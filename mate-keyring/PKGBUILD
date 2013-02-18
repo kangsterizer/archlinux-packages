@@ -18,6 +18,8 @@ sha256sums=('295d0e9969e614afd0616425dacb3921b7fd16626985278c88d6cbe36f4efd6a')
 
 build() {
     cd "${srcdir}/$pkgname-$pkgver"
+# see https://github.com/mate-desktop/mate-keyring/commit/f1423d4
+	patch -p0 < ${pkgdir}/../asn1x.patch
 
 	mate-autogen
     ./configure --prefix=/usr --sysconfdir=/etc \

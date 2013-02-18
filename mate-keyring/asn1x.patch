@@ -1,0 +1,10 @@
+--- egg/egg-asn1x.h.ori	2012-07-09 05:27:21.000000000 -0700
++++ egg/egg-asn1x.h	2013-02-17 17:44:11.697102130 -0800
+@@ -25,6 +25,7 @@
+ #define EGG_ASN1X_H_
+ 
+ #include <glib.h>
++#include <libtasn1.h>
+ 
+ #ifndef HAVE_EGG_ALLOCATOR
+ typedef void* (*EggAllocator) (void* p, gsize);
